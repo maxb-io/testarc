@@ -9,7 +9,7 @@ on:
 jobs:
   test-runner:
     name: Run on set1 ARC runner
-    runs-on: [self-hosted, Linux, X64, set1]
+    runs-on: [set1]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
