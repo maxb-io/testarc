@@ -1,0 +1,11 @@
+
+
+kubectl create secret generic pre-defined-secret   -n arc-runners   --from-literal=github_app_id="2822571"   --from-literal=github_app_installation_id="108832955"   --from-file=github_app_private_key=private-key.pem
+
+helm install set1   --namespace arc-runners   --create-namespace   --set githubConfigUrl="https://github.com/maxb-io/testarc"   --set githubConfigSecret="pre-defined-secret"   --set runnerScaleSetName="set1"   --set minRunners=1   --set maxRunners=3   oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set
+
+
+#Debug and clean up
+kubectl logs -n arc-systems deploy/arc-gha-rs-controller -f
+kubectl delete secret controller-manager -n arc-runners
+helm uninstall set1 -n arc-runners

@@ -1,0 +1,21 @@
+name: ARC Self-Hosted Runner Test
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test-runner:
+    name: Run on set1 ARC runner
+    runs-on: [self-hosted, Linux, X64, set1]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Say hello from ARC runner
+        run: |
+          echo "This job is running on an ARC-managed self-hosted runner!"
+          uname -a
+          whoami
